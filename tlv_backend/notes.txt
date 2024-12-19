@@ -1,0 +1,4 @@
+data ( data source - source of data like databases)
+routes (endpoints configuration)
+controller (function/s that you execute when a route is called. Here is where you handle the requests)
+repository (here is where you transform data from the data source)

@@ -1,0 +1,1 @@
+export const CLANS_WARLOG = "/clans/{tag}/warlog";
