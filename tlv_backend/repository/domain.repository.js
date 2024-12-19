@@ -1,5 +1,5 @@
 import whoIsApi from "../data/configs/whoIsApi.js";
-import { ApiError } from "../middleware/errorHandler.js";
+import { ApiServiceError } from "../middleware/errorHandler.js";
 import logger from "../services/logger.service.js";
 import { config } from "../data/configs/index.js";
 
@@ -9,7 +9,7 @@ export const getDomainData = async (domain, type) => {
       apiKey: config.api.key,
       domainName: domain,
       outputFormat: "JSON",
-      ignoreRawTexts: 1
+      ignoreRawTexts: 1,
     };
 
     const result = await whoIsApi.get(`/WhoisService?`, { params });
@@ -22,11 +22,11 @@ export const getDomainData = async (domain, type) => {
   } catch (error) {
     logger.error(`Error in domain repository: ${error.message}`);
 
-    if (error instanceof ApiError) {
+    if (error instanceof ApiServiceError) {
       throw error;
     }
 
-    throw new ApiError(
+    throw new ApiServiceError(
       error.response?.status || 500,
       error.message || `Failed to fetch ${type} information`
     );
@@ -47,12 +47,12 @@ export const getDomainData = async (domain, type) => {
     }
 
     return {
-      domainName: domain || 'undefined',
-      registrarName: registrar || 'undefined',
-      registrationDate: createdDate || 'undefined',
-      expirationDate: expiresDate || 'undefined',
-      estimatedDomainAge: age || 'undefined',
-      hostNames: hosts || 'undefined'
+      domainName: domain || "undefined",
+      registrarName: registrar || "undefined",
+      registrationDate: createdDate || "undefined",
+      expirationDate: expiresDate || "undefined",
+      estimatedDomainAge: age || "undefined",
+      hostNames: hosts || "undefined",
     };
   }
 
@@ -66,10 +66,10 @@ export const getDomainData = async (domain, type) => {
 
     console.log(data.WhoisRecord);
     return {
-      registrantName: registrant || 'undefined',
-      technicalContactName: technicalContact || 'undefined',
-      administrativeContactName: administrativeContact || 'undefined',
-      contactEmail: email || 'undefined',
+      registrantName: registrant || "undefined",
+      technicalContactName: technicalContact || "undefined",
+      administrativeContactName: administrativeContact || "undefined",
+      contactEmail: email || "undefined",
     };
   }
 };

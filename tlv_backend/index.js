@@ -4,6 +4,7 @@ import { errorHandler } from "./middleware/errorHandler.js";
 import { config } from "./data/configs/index.js";
 import { securityMiddleware } from "./middleware/security.js";
 import routes from "./routes/routes.js";
+import { apiLimiter } from "./middleware/rateLimiter.js";
 
 const initializeServer = async () => {
   try {
@@ -22,7 +23,8 @@ const initializeServer = async () => {
     app.use(express.static("src"));
 
     // 4. Routes
-    app.use('/whoisserver',routes);
+    app.use('/whoisserver', apiLimiter);
+    app.use('/whoisserver', routes);
 
     // 5. Error handler should be last
     app.use(errorHandler);
