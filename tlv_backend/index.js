@@ -1,18 +1,12 @@
-import { configureRedis } from "./redis/index.js";
 import logger from "./services/logger.service.js";
 import express from "express";
-import clanRoutes from "./routes/clanRoutes.js";
-import warRoutes from "./routes/warRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import { config } from "./data/configs/index.js";
 import { securityMiddleware } from "./middleware/security.js";
+import routes from "./routes/routes.js";
 
 const initializeServer = async () => {
   try {
-    // Initialize Redis
-    await configureRedis();
-    logger.info("Redis configured successfully");
-
     // Initialize Server with middleware
     const app = express();
 
@@ -28,8 +22,7 @@ const initializeServer = async () => {
     app.use(express.static("src"));
 
     // 4. Routes
-    app.use("/clans", clanRoutes);
-    app.use("/war", warRoutes);
+    app.use('/whoisserver',routes);
 
     // 5. Error handler should be last
     app.use(errorHandler);

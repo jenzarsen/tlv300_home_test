@@ -1,0 +1,68 @@
+const obj = {
+  createdDate: "1997-09-15T07:00:00+0000",
+  updatedDate: "2024-08-02T02:17:33+0000",
+  expiresDate: "2028-09-13T07:00:00+0000",
+  registrant: {
+    organization: "Google LLC",
+    state: "CA",
+    country: "UNITED STATES",
+    countryCode: "US",
+  },
+  administrativeContact: {
+    organization: "Google LLC",
+    state: "CA",
+    country: "UNITED STATES",
+    countryCode: "US",
+  },
+  technicalContact: {
+    organization: "Google LLC",
+    state: "CA",
+    country: "UNITED STATES",
+    countryCode: "US",
+  },
+  domainName: "google.com",
+  nameServers: {
+    hostNames: [
+      "ns1.google.com",
+      "ns3.google.com",
+      "ns4.google.com",
+      "ns2.google.com",
+    ],
+    ips: [],
+  },
+  status:
+    "clientUpdateProhibited clientTransferProhibited clientDeleteProhibited serverUpdateProhibited serverTransferProhibited serverDeleteProhibited",
+  parseCode: 3515,
+  audit: {
+    createdDate: "2024-12-19 07:01:10 UTC",
+    updatedDate: "2024-12-19 07:01:10 UTC",
+  },
+  registrarName: "MarkMonitor, Inc.",
+  registrarIANAID: "292",
+  createdDateNormalized: "1997-09-15 07:00:00 UTC",
+  updatedDateNormalized: "2024-08-02 02:17:33 UTC",
+  expiresDateNormalized: "2028-09-13 07:00:00 UTC",
+  registryData: {
+    createdDate: "1997-09-15T04:00:00Z",
+    updatedDate: "2019-09-09T15:39:04Z",
+    expiresDate: "2028-09-14T04:00:00Z",
+    domainName: "google.com",
+    nameServers: { hostNames: [Array], ips: [] },
+    status:
+      "clientDeleteProhibited clientTransferProhibited clientUpdateProhibited serverDeleteProhibited serverTransferProhibited serverUpdateProhibited",
+    parseCode: 251,
+    audit: {
+      createdDate: "2024-12-19 07:01:09 UTC",
+      updatedDate: "2024-12-19 07:01:09 UTC",
+    },
+    registrarName: "MarkMonitor Inc.",
+    registrarIANAID: "292",
+    createdDateNormalized: "1997-09-15 04:00:00 UTC",
+    updatedDateNormalized: "2019-09-09 15:39:04 UTC",
+    expiresDateNormalized: "2028-09-14 04:00:00 UTC",
+    whoisServer: "whois.markmonitor.com",
+  },
+  contactEmail: "abusecomplaints@markmonitor.com",
+  domainNameExt: ".com",
+  estimatedDomainAge: 9957,
+};

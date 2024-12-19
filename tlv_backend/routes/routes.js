@@ -1,7 +1,9 @@
 import express from "express";
-import { useGetClanMembers, useGetClanWarLog } from "../controllers/clan.controller.js";
+import { getDomainInfo } from "../controllers/domain.controller.js";
 
 const router = express.Router();
 
+// Domain information endpoint with both parameters in path
+router.get('/:domainName/:type', getDomainInfo);
 
 export default router;
