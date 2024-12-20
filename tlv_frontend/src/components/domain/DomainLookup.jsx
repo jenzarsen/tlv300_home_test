@@ -13,44 +13,13 @@ const DomainLookup = () => {
 
   const [loading, setLoading] = useState(false);
 
-  //const { info } = useGetDomainInfo(submittedDomain, submittedType);
+  const { info } = useGetDomainInfo(submittedDomain, submittedType);
 
-  const [info, setInfo] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //setSubmittedDomain(domain);
-    //setSubmittedType(type);
-    //setLoading(true);
-    setInfo(sampleDomainInfo);
-    console.log(sampleDomainInfo, type);
-  };
-
-  const renderContactInfo = () => {
-    if (!info) return null;
-    return (
-      <table>
-        <thead>
-          <th>Registrant Name</th>
-          <th>Technical Contact</th>
-          <th>Administrative Contact</th>
-          <th>Contact Email</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{info.registrantName}</td>
-          </tr>
-          <tr>
-            <td>{info.technicalContactName}</td>
-          </tr>
-          <tr>
-            <td>{info.administrativeContactName}</td>
-          </tr>
-          <tr>
-            <td>{info.contactEmail}</td>
-          </tr>
-        </tbody>
-      </table>
-    );
+    setSubmittedDomain(domain);
+    setSubmittedType(type);
+    setLoading(true);
   };
 
   return (
@@ -82,9 +51,7 @@ const DomainLookup = () => {
           {loading ? "Loading..." : "Lookup Domain"}
         </button>
       </form>
-
-      {/*{error && <p>{error}</p>} */}
-
+      
       {info && (
         <div className={styles.container + " " + styles.fadeIn}>
           {type === "domain" ? (

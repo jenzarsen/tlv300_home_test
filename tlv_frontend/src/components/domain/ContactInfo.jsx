@@ -31,4 +31,4 @@ const ContactInfo = (props) => {
   );
 };
 
-export default DomainInfo;
+export default ContactInfo;

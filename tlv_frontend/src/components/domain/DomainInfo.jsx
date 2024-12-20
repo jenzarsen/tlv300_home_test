@@ -27,11 +27,10 @@ const DomainInfo = (props) => {
       headers={tableHeaders}
       data={[
         domainName,
-        registrantName,
         registrationDate,
         expirationDate,
         estimatedDomainAge,
-        hostNames
+        hostNames,
       ]}
     />
   );
