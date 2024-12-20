@@ -10,25 +10,24 @@ export const useGetDomainInfo = (domainName, type) => {
 
   const getInfo = useCallback(async () => {
     if (!domainName) return;
-
     //Set Loading State
     setState((prev) => ({ ...prev, isLoading: true, error: null }));
 
     try {
       const result = await getDomainInfo(domainName, type);
-        console.log(result);
+      console.log(result);
       //Set Data from result
       setState({
         info: result?.data || {},
         isLoading: false,
         error: null,
       });
-    } catch (error) {
+    } catch (err) {
       //Set Error in case there's an issue
       setState({
         info: {},
         isLoading: false,
-        error: error?.response?.data?.message || "Failed to fetch domain data.",
+        error: err?.response?.data?.message || "Failed to fetch domain data.",
       });
     }
   }, [domainName, type]);

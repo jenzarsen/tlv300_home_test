@@ -3,6 +3,9 @@ import styles from "./DomainLookup.module.css";
 import { useGetDomainInfo } from "data/hooks/useGetDomainInfo.js";
 import DomainInfo from "./DomainInfo";
 import ContactInfo from "./ContactInfo";
+import ErrorMessage from "components/common/ErrorMessage";
+import LoadingSpinner from "components/common/LoadingSpinner";
+import { validateDomain } from "utils/validation.js";
 
 const DomainLookup = () => {
   const [domain, setDomain] = useState("");
@@ -11,15 +14,21 @@ const DomainLookup = () => {
   const [submittedDomain, setSubmittedDomain] = useState("");
   const [submittedType, setSubmittedType] = useState("domain");
 
-  const [loading, setLoading] = useState(false);
+  const { info, isLoading } = useGetDomainInfo(submittedDomain, submittedType);
 
-  const { info } = useGetDomainInfo(submittedDomain, submittedType);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateDomain(domain)) {
+      setError("Please enter a valid domain name (e.g., google.com).");
+      return;
+    }
+
     setSubmittedDomain(domain);
     setSubmittedType(type);
-    setLoading(true);
+    setError(null);
   };
 
   return (
@@ -46,13 +55,16 @@ const DomainLookup = () => {
         <button
           className={styles.button}
           type="submit"
-          disabled={loading || !domain}
+          disabled={isLoading || !domain}
         >
-          {loading ? "Loading..." : "Lookup Domain"}
+          {isLoading ? "Loading..." : "Lookup Domain"}
         </button>
       </form>
-      
-      {info && (
+
+      {error && <ErrorMessage message={error} />}
+      {isLoading && <LoadingSpinner />}
+
+      {!error && !isLoading && info && (
         <div className={styles.container + " " + styles.fadeIn}>
           {type === "domain" ? (
             <DomainInfo domainInfo={info} />
