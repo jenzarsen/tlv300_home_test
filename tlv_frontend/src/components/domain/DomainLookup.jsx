@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./DomainLookup.module.css";
 import { useGetDomainInfo } from "data/hooks/useGetDomainInfo.js";
 import DomainInfo from "./DomainInfo";
-import {sampleDomainInfo} from "context/sampleDomainInfo.js";
+import ContactInfo from "./ContactInfo";
 
 const DomainLookup = () => {
   const [domain, setDomain] = useState("");
@@ -14,8 +14,8 @@ const DomainLookup = () => {
   const [loading, setLoading] = useState(false);
 
   //const { info } = useGetDomainInfo(submittedDomain, submittedType);
-  
-  const [info,setInfo] = useState({});
+
+  const [info, setInfo] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
     //setSubmittedDomain(domain);
@@ -86,8 +86,12 @@ const DomainLookup = () => {
       {/*{error && <p>{error}</p>} */}
 
       {info && (
-        <div className={styles.container+' '+styles.fadeIn}>
-          {type === "domain" ? <DomainInfo domainInfo = {info} />: renderContactInfo()}
+        <div className={styles.container + " " + styles.fadeIn}>
+          {type === "domain" ? (
+            <DomainInfo domainInfo={info} />
+          ) : (
+            <ContactInfo contactInfo={info} />
+          )}
         </div>
       )}
     </div>
