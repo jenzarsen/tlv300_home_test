@@ -1,0 +1,1 @@
+export const DOMAIN_INFO = "/whoisserver/{domain_name}/{info_type}";

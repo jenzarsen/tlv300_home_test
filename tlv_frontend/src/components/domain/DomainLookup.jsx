@@ -1,69 +1,32 @@
 import React, { useState } from "react";
 import styles from "./DomainLookup.module.css";
+import { useGetDomainInfo } from "data/hooks/useGetDomainInfo.js";
+import DomainInfo from "./DomainInfo";
+import {sampleDomainInfo} from "context/sampleDomainInfo.js";
 
 const DomainLookup = () => {
   const [domain, setDomain] = useState("");
   const [type, setType] = useState("domain");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
 
+  const [submittedDomain, setSubmittedDomain] = useState("");
+  const [submittedType, setSubmittedType] = useState("domain");
+
+  const [loading, setLoading] = useState(false);
+
+  //const { info } = useGetDomainInfo(submittedDomain, submittedType);
+  
+  const [info,setInfo] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-    setLoading(true);
-
-    try {
-      const response = await fetch(`/api/v1/domain/${domain}/${type}`);
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch domain information: ${response.statusText}`
-        );
-      }
-      const result = await response.json();
-      setData(result.data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const renderDomainInfo = () => {
-    if (!data) return null;
-    return (
-      <table>
-        <thead>
-          <th>Domain Name</th>
-          <th>Registrar</th>
-          <th>Registration Date</th>
-          <th>Expiration Date</th>
-          <th>Domain Age</th>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>{data.domainName}</td>
-          </tr>
-          <tr>
-            <td>{data.registrarName}</td>
-          </tr>
-          <tr>
-            <td>{data.registrationDate}</td>
-          </tr>
-          <tr>
-            <td>{data.expirationDate}</td>
-          </tr>
-          <tr>
-            <td>{data.estimatedDomainAge} days</td>
-          </tr>
-        </tbody>
-      </table>
-    );
+    //setSubmittedDomain(domain);
+    //setSubmittedType(type);
+    //setLoading(true);
+    setInfo(sampleDomainInfo);
+    console.log(sampleDomainInfo, type);
   };
 
   const renderContactInfo = () => {
-    if (!data) return null;
+    if (!info) return null;
     return (
       <table>
         <thead>
@@ -74,16 +37,16 @@ const DomainLookup = () => {
         </thead>
         <tbody>
           <tr>
-            <td>{data.registrantName}</td>
+            <td>{info.registrantName}</td>
           </tr>
           <tr>
-            <td>{data.technicalContactName}</td>
+            <td>{info.technicalContactName}</td>
           </tr>
           <tr>
-            <td>{data.administrativeContactName}</td>
+            <td>{info.administrativeContactName}</td>
           </tr>
           <tr>
-            <td>{data.contactEmail}</td>
+            <td>{info.contactEmail}</td>
           </tr>
         </tbody>
       </table>
@@ -102,7 +65,11 @@ const DomainLookup = () => {
           required
         />
 
-        <select className={styles.select} value={type} onChange={(e) => setType(e.target.value)}>
+        <select
+          className={styles.select}
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        >
           <option value="domain">Domain Information</option>
           <option value="contact">Contact Information</option>
         </select>
@@ -116,11 +83,11 @@ const DomainLookup = () => {
         </button>
       </form>
 
-      {error && <p>{error}</p>}
+      {/*{error && <p>{error}</p>} */}
 
-      {data && (
-        <div>
-          {type === "domain" ? renderDomainInfo() : renderContactInfo()}
+      {info && (
+        <div className={styles.container+' '+styles.fadeIn}>
+          {type === "domain" ? <DomainInfo domainInfo = {info} />: renderContactInfo()}
         </div>
       )}
     </div>
